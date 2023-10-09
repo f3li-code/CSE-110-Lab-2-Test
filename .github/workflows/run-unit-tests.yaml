@@ -20,6 +20,11 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
+    #          MODIFIED HERE
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+    #          MODIFIED HERE
+
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
