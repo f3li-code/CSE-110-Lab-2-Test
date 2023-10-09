@@ -2,14 +2,14 @@ package edu.ucsd.cse110.lab2;
 
 public class MyQueue {
     private int[] elements;
-    private int front;
-    private int rear;
+    private int front; // the first valid element's index, queue's head
+    private int rear; // the first position to insert a new element
     private int size;
     
     public MyQueue(int capacity) {
         elements = new int[capacity];
         front = 0;
-        rear = -1;
+        rear = 0;
         size = 0;
     }
     
@@ -18,7 +18,7 @@ public class MyQueue {
     }
     
     public boolean isFull() {
-        return size == elements.length-1;
+        return size == elements.length;
     }
     
     public int size() {
@@ -29,8 +29,8 @@ public class MyQueue {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
         }
-        rear = (rear + 1) % elements.length;
         elements[rear] = element;
+        rear = (rear + 1) % elements.length;
         size++;
     }
     
@@ -40,7 +40,7 @@ public class MyQueue {
         }
         int element = elements[front];
         front = (front + 1) % elements.length;
-        size++;
+        size--;
         return element;
     }
     
@@ -48,6 +48,6 @@ public class MyQueue {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return elements[rear];
+        return elements[front];
     }
 }
